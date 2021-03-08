@@ -69,8 +69,6 @@ def train(args):
       elif iter == int(total_iter * 0.9):
         opt.lr /= 10
 
-      break
-
     acc = 0
     net.eval()
     for X,t in val_loader:

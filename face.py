@@ -63,22 +63,3 @@ class Face:
       return None
 
     return face[0]
-
-if __name__ == "__main__":
-  import os
-  f = Face()
-  from tqdm import tqdm
-
-  for i in range(10):
-    print(i)
-    for path in tqdm(os.listdir(f"train_images/{i}/")):
-      img = cv2.imread(f"train_images/{i}/{path}")
-      os.remove(f"train_images/{i}/{path}")
-      face = f.align_face(img)
-      
-      if face is None:
-        continue
-      if max(face.shape[:2]) < 60:
-        continue
-
-      cv2.imwrite(f"train_images/{i}/{path}",face)
