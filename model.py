@@ -5,21 +5,14 @@ from torchvision import models
 
 
 class LastLayer(nn.Module):
-  def __init__(self, in_ch, out_ch, num_classes, noW):
+  def __init__(self, in_ch, num_classes):
     super().__init__()
-    self.W1 = nn.Parameter(torch.randn(out_ch, in_ch))
-    self.W2 = nn.Parameter(torch.randn(num_classes, out_ch))
-    self.noW = noW
+    self.W = nn.Parameter(torch.randn(num_classes, in_ch))
     
   def forward(self,x):
-    h = F.linear(x,self.W1)
-
-    h = F.normalize(h)
-    if self.noW:
-      return h
-    
-    W = F.normalize(self.W2)
-    return F.linear(h, W)
+    x = F.normalize(x)
+    W = F.normalize(self.W)
+    return F.linear(x, W)
 
 
 class AngularMarginPenalty(nn.Module):
@@ -36,7 +29,7 @@ class AngularMarginPenalty(nn.Module):
 
 
 def get_model(num_classes, noW=False):
-  net = models.resnet50(pretrained=False)
-  net.fc = LastLayer(2048, 512, num_classes, noW)
+  net = models.resnet18(pretrained=False)
+  net.fc = LastLayer(512, num_classes)
   return net
 
