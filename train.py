@@ -49,7 +49,7 @@ def train(args):
   criterion = nn.CrossEntropyLoss()
   criterion.to(device)
 
-  opt = optim.SGD([net.parameters()], lr=0.1, momentum=0.9, weight_decay=5e-4)
+  opt = optim.SGD(net.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
   scheduler = optim.lr_scheduler.MultiStepLR(opt, milestones=[int(args.epochs*0.6), int(args.epochs*0.9)], gamma=0.1)
 
   total_iter = args.epochs * train_size // args.batch
