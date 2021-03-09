@@ -93,7 +93,6 @@ def train(args):
       X = X.to(device)
       t = t.to(device)
       loss = train_loop(net, X, t, arc, criterion, opt, scheduler)
-      break
 
     acc = test(net, val_loader, device)
 
