@@ -54,6 +54,7 @@ def train(args):
   scheduler = optim.lr_scheduler.MultiStepLR(opt, milestones=[int(args.epochs*0.6), int(args.epochs*0.9)], gamma=0.1)
 
   total_iter = args.epochs * train_size // args.batch
+  min_acc = 1
   
   for epoch in range(args.epochs):
 
@@ -73,10 +74,12 @@ def train(args):
         y = net(X)
         acc += (y.argmax(1)==t).sum().to("cpu").item()
 
-    print(f"epoch : {epoch+1}  ACC : {acc/val_size:.5f}")
+    acc /= val_size
 
-  
-  torch.save(net.to("cpu").state_dict(), "arcface.pth")
+    print(f"epoch : {epoch+1}  ACC : {acc:.5f}")
+    if acc < min_acc:
+      min_acc = acc
+      torch.save(net.state_dict(), "arcface.pth")
 
 
 if __name__ == "__main__":
