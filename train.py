@@ -37,7 +37,7 @@ def train(args):
   val_size  = len(dataset)-train_size
   train_data, val_data = torch.utils.data.random_split(dataset, [train_size, val_size])
   train_loader = torch.utils.data.DataLoader(train_data, batch_size=args.batch, shuffle=True)
-  val_loader = torch.utils.data.DataLoader(val_data, batch_size=args.batch, shuffle=True)
+  val_loader = torch.utils.data.DataLoader(val_data, batch_size=args.batch, shuffle=False)
 
   print(f"train data : {train_size}  val data : {val_size}")
   
@@ -49,12 +49,13 @@ def train(args):
   criterion = nn.CrossEntropyLoss()
   criterion.to(device)
 
-  opt = optim.SGD(net.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
+  opt = optim.SGD([net.parameters()], lr=0.1, momentum=0.9, weight_decay=5e-4)
+  scheduler = optim.lr_scheduler.MultiStepLR(opt, milestones=[int(args.epochs*0.6), int(args.epochs*0.9)], gamma=0.1)
 
-  iter = 0
   total_iter = args.epochs * train_size // args.batch
   
   for epoch in range(args.epochs):
+    scheduler.step()
 
     net.train()
     for X,t in train_loader:
@@ -62,20 +63,15 @@ def train(args):
       t = t.to(device)
       loss = train_loop(net, X, t, arc, criterion, opt)
 
-      iter += 1
-
-      if iter == int(total_iter * 0.6):
-        opt.lr /= 10
-      elif iter == int(total_iter * 0.9):
-        opt.lr /= 10
-
     acc = 0
     net.eval()
     for X,t in val_loader:
       X = X.to(device)
       t = t.to(device)
-      y = net(X)
-      acc += (y.argmax(1)==t).sum().to("cpu").item()
+
+      with torch.no_grad():
+        y = net(X)
+        acc += (y.argmax(1)==t).sum().to("cpu").item()
 
     print(f"epoch : {epoch+1}  ACC : {acc/val_size:.5f}")
 
@@ -86,12 +82,12 @@ def train(args):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser("Training ArcFace")
 
-  parser.add_argument("--data", type=str, help="path of training images")
-  parser.add_argument("--epochs", type=int, help="number of all epochs")
-  parser.add_argument("--batch", type=int, help="number of batch size")
+  parser.add_argument("--data",                type=str, help="path of training images")
+  parser.add_argument("--epochs", default=100, type=int, help="number of all epochs")
+  parser.add_argument("--batch",  default=256, type=int, help="number of batch size")
   
   parser.add_argument("--margin", default=0.5, type=float, help="value of the angular margin")
-  parser.add_argument("--scale", default=64, type=float, help="value of the feature scale")
+  parser.add_argument("--scale",  default=32,  type=float, help="value of the feature scale")
 
   args = parser.parse_args()
 
