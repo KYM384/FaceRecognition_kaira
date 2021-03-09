@@ -36,7 +36,7 @@ class AngularMarginPenalty(nn.Module):
 
 
 def get_model(num_classes, noW=False):
-  net = models.resnet50()
+  net = models.resnet50(pretrained=False)
   net.fc = LastLayer(2048, 512, num_classes, noW)
   return net
 
