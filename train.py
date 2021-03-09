@@ -35,7 +35,7 @@ def test(net, data_loader, device):
       y = net(X)
       acc += (y.argmax(1)==t).sum().to("cpu").item()
 
-  return acc / len(data_loader)
+  return acc / len(data_loader.dataset)
 
 
 def train(args):
