@@ -84,7 +84,7 @@ def train(args):
   opt = optim.SGD(net.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
   scheduler = optim.lr_scheduler.MultiStepLR(opt, milestones=[int(total_epoch*0.6), int(total_epoch*0.9)], gamma=0.1)
 
-  min_acc = 1
+  max_acc = 0
   
   for epoch in range(total_epoch):
 
@@ -97,8 +97,8 @@ def train(args):
     acc = test(net, val_loader, device)
 
     print(f"epoch : {epoch+1}  ACC : {acc:.5f}")
-    if acc < min_acc:
-      min_acc = acc
+    if acc > max_acc:
+      max_acc = acc
       torch.save(net.state_dict(), "weights/arcface.pth")
 
 
