@@ -10,7 +10,7 @@ import numpy as np
 
 from model import get_model, AngularMarginPenalty
 
-def train_loop(net, X, T, arc, criterion, opt):
+def train_loop(net, X, T, arc, criterion, opt, scheduler):
   y = net(X)
   y = arc(y, T)
 
@@ -18,6 +18,7 @@ def train_loop(net, X, T, arc, criterion, opt):
   opt.zero_grad()
   loss.backward()
   opt.step()
+  scheduler.step()
 
   return loss.to("cpu").item()
 
@@ -55,13 +56,12 @@ def train(args):
   total_iter = args.epochs * train_size // args.batch
   
   for epoch in range(args.epochs):
-    scheduler.step()
 
     net.train()
     for X,t in train_loader:
       X = X.to(device)
       t = t.to(device)
-      loss = train_loop(net, X, t, arc, criterion, opt)
+      loss = train_loop(net, X, t, arc, criterion, opt, scheduler)
 
     acc = 0
     net.eval()
