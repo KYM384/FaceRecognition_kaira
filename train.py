@@ -49,15 +49,13 @@ def train(args):
   num_classes = 10
   total_epoch = args.epoch
 
-  transform_train = tf.Compose([tf.Resize(128),
-                                tf.CenterCrop(112),
+  transform_train = tf.Compose([tf.Resize((112, 112)),
                                 tf.RandomHorizontalFlip(),
                                 tf.ColorJitter(brightness=0.5, contrast=0.5, saturation=0.5),
                                 tf.ToTensor(),
                                 tf.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
                               ])
-  transform_val = tf.Compose([tf.Resize(128),
-                                tf.CenterCrop(112),
+  transform_val = tf.Compose([tf.Resize((112, 112)),
                                 tf.ToTensor(),
                                 tf.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
                               ])
