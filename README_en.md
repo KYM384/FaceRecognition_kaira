@@ -1,12 +1,11 @@
 # FaceRecognition_kaira
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github.com/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
-**[日本語(Japanese)](README.md)**
+![README:Japanese(日本語)](https://img.shields.io/badge/README-Japanese(日本語)-red) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
 
 This is the repository for the work exhibited at NF2020.
 
 
 ## Run the demo
-You can run the demo from [here](https://colab.research.google.com/github.com/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb). (You can also open the link by clicking `Open in Colab` above.)
+You can run the demo from [here](https://colab.research.google/github.com/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb). (You can also open the link by clicking `Open in Colab` above.)
 
 If you have a Python environment, you can clone and run the demo.
 See [Environment](## Environment) for the required modules.
