@@ -10,7 +10,7 @@ def main(args):
   assert img, f"No such file: '{args.image}'"
 
   results = rec.recognize(img)
-  assert results, "No face detected"
+  assert results, "No face found"
 
   face, scores = results
   face = cv2.resize(face, (256, 256))
