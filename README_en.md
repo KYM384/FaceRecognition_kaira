@@ -1,5 +1,5 @@
 # FaceRecognition_kaira
-[![README:Japanese(日本語)](https://img.shields.io/badge/README-Japanese(日本語)-red)](README.md) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
 
 This is the repository for the work exhibited at NF2020.
 
@@ -27,6 +27,7 @@ python demo.py hoge.png --save_face #Save the detected face image.
 
 ## Method
 We train ResNet18 for 10 persons images. More specifically, we through ResNet18 to get a feature map $\in \mathbb{R}^{512}$ and pass it through a FCN(Fully Conected Layer) to learn classifications, as shown in the figure below. The inter-class variance of the feature map is increased by training it using **ArcFace**. For more information about ArcFace, please refer to the link below (Qiita).
+
 [モダンな深層距離学習 (deep metric learning) 手法: SphereFace, CosFace, ArcFace](https://qiita.com/yu4u/items/078054dfb5592cbb80cc)
 ![training](images/training.png)
 

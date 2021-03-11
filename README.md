@@ -1,7 +1,9 @@
 # FaceRecognition_kaira
-[![README:English](https://img.shields.io/badge/README-English-red)](README_en.md)  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
 
 NF2020での展示作品用のレポジトリです。
+
+[README in English](README_en.md)
 
 
 ## 使い方
@@ -27,6 +29,7 @@ python demo.py hoge.png --save_face  #検出した顔画像を保存します。
 
 ## 手法
 ResNet18を10人分の顔画像で学習させています。より具体的には、下図のCNN(ResNet18)を通しfeature map $\in \mathbb{R}^{512}$を得て、全層結合に通してクラス分類を学習させています。**ArcFace**を使って学習させることで、feature mapのクラス間分散を大きくしています。ArcFaceについては下のリンク(Qiita)をご参照ください。
+
 [モダンな深層距離学習 (deep metric learning) 手法: SphereFace, CosFace, ArcFace](https://qiita.com/yu4u/items/078054dfb5592cbb80cc)
 ![training](images/training.png)
 
