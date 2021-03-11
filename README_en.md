@@ -26,7 +26,8 @@ python demo.py hoge.png --save_face #Save the detected face image.
 
 
 ## Method
-We train ResNet18 for 10 persons images. More specifically, we through ResNet18 to get a feature map $\in \mathbb{R}^{512}$ and pass it through a FCN(Fully Conected Layer) to learn classifications, as shown in the figure below .
+We train ResNet18 for 10 persons images. More specifically, we through ResNet18 to get a feature map $\in \mathbb{R}^{512}$ and pass it through a FCN(Fully Conected Layer) to learn classifications, as shown in the figure below. The inter-class variance of the feature map is increased by training it using **ArcFace**. For more information about ArcFace, please refer to the link below (Qiita).
+[モダンな深層距離学習 (deep metric learning) 手法: SphereFace, CosFace, ArcFace](https://qiita.com/yu4u/items/078054dfb5592cbb80cc)
 ![training](images/training.png)
 
 We have about 70 refence person images for inference. We pass them through the trained CNN above and convert them into a feature map. After converting the input images into a feature map in the same way, we take the Cosine Similarity of the feature map of the refence images, and use the value as the score. In the demo, the top 5 scores are displayed.

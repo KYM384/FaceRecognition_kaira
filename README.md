@@ -26,7 +26,8 @@ python demo.py hoge.png --save_face  #検出した顔画像を保存します。
 
 
 ## 手法
-ResNet18を10人分の顔画像で学習させています。より具体的には、下図のCNN(ResNet18)を通しfeature map $\in \mathbb{R}^{512}$を得て、全層結合に通してクラス分類を学習させています。
+ResNet18を10人分の顔画像で学習させています。より具体的には、下図のCNN(ResNet18)を通しfeature map $\in \mathbb{R}^{512}$を得て、全層結合に通してクラス分類を学習させています。**ArcFace**を使って学習させることで、feature mapのクラス間分散を大きくしています。ArcFaceについては下のリンク(Qiita)をご参照ください。
+[モダンな深層距離学習 (deep metric learning) 手法: SphereFace, CosFace, ArcFace](https://qiita.com/yu4u/items/078054dfb5592cbb80cc)
 ![training](images/training.png)
 
 推論にはrefence imagesとして約70人分の画像を用意しています。これを上の学習済みのCNNに通しfeature mapに変換しておきます。入力された画像も同様にfeature mapに変換した後、refence imagesのfeature mapとコサイン類似度(CosSim)を取り、その値をscoreとします。デモではこのscoreの上位5番までを表示するようにしています。
