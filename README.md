@@ -1,5 +1,5 @@
 # FaceRecognition_kaira
-![README:English](https://img.shields.io/badge/README-English-red)  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
+[![README:English](https://img.shields.io/badge/README-English-red)](README_en.md)  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
 
 NF2020での展示作品用のレポジトリです。
 
