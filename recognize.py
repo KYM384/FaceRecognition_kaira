@@ -54,7 +54,11 @@ class Recognize:
     return vec
 
   def recognize(self, img, n=5, is_face=False):
-    face, vec = self.img2vec(img, is_face, return_face=True)
+    result = self.img2vec(img, is_face, return_face=True)
+    if result is None:
+      return None
+    
+    face, vec = result
     scores = self.face_matrix @ vec
     
     ranking = np.argsort(scores)[::-1]
