@@ -28,7 +28,7 @@ python demo.py hoge.png --save_face  #検出した顔画像を保存します。
 
 
 ## 手法
-ResNet18を10人分の顔画像で学習させています。より具体的には、下図のCNN(ResNet18)を通しfeature map $\in \mathbb{R}^{512}$を得て、全層結合に通してクラス分類を学習させています。**ArcFace**を使って学習させることで、feature mapのクラス間分散を大きくしています。ArcFaceについては下のリンク(Qiita)をご参照ください。
+ResNet18を10人分の顔画像で学習させています。より具体的には、下図のCNN(ResNet18)を通しfeature map (512次元ベクトル)を得て、全層結合に通してクラス分類を学習させています。**ArcFace**を使って学習させることで、feature mapのクラス間分散を大きくしています。ArcFaceについては下のリンク(Qiita)をご参照ください。
 
 [モダンな深層距離学習 (deep metric learning) 手法: SphereFace, CosFace, ArcFace](https://qiita.com/yu4u/items/078054dfb5592cbb80cc)
 ![training](images/training.png)
@@ -36,5 +36,5 @@ ResNet18を10人分の顔画像で学習させています。より具体的に�
 推論にはrefence imagesとして約70人分の画像を用意しています。これを上の学習済みのCNNに通しfeature mapに変換しておきます。入力された画像も同様にfeature mapに変換した後、refence imagesのfeature mapとコサイン類似度(CosSim)を取り、その値をscoreとします。デモではこのscoreの上位5番までを表示するようにしています。
 ![inference](images/inference.png)
 
-コサイン類似度とは、2つのfeature mapをベクトルと見なした時の、成す角のコサインのことです。従って(学習が上手く行ったとすると)、画像同士が似ていればそのベクトルも同じような値となり、成す角は0に近くなり、コサインの値は1に近づきます。下図はそのイメージ図で、右側の2枚の男性の画像が成す角$\theta_1$は小さくなり、反対に左側の女性の画像との成す角$\theta_2$は大きくなります。
+コサイン類似度とは、2つのfeature mapをベクトルと見なした時の、成す角のコサインのことです。従って(学習が上手く行ったとすると)、画像同士が似ていればそのベクトルも同じような値となり、成す角は0に近くなり、コサインの値は1に近づきます。下図はそのイメージ図で、右側の2枚の男性の画像が成す角θ1は小さくなり、反対に左側の女性の画像との成す角θ2は大きくなります。
 ![image of cosine_similarity](images/cosine.png)
