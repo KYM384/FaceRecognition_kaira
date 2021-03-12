@@ -1,7 +1,7 @@
 # FaceRecognition_kaira
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
 
-This is the repository for the work exhibited at NF2020.
+This is the repository for the work exhibited at the 62nd November Festival.
 
 
 ## Run the demo

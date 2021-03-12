@@ -1,7 +1,7 @@
 # FaceRecognition_kaira
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KYM384/FaceRecognition_kaira/blob/main/demo.ipynb)
 
-NF2020での展示作品用のレポジトリです。
+第62回11月祭での展示作品用のレポジトリです。
 
 [README in English](README_en.md)
 
